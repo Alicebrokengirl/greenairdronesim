@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GreenAirDrone — Atmospheric dispersion intelligence</title>
+  <meta name="description" content="GreenAirDrone web platform: OpenFOAM scenarios, plume analysis and drone measurements." />
+  <link rel="stylesheet" href="/static/css/app.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">GA</div>
+        <div>
+          <div class="brand-name">GreenAirDrone</div>
+          <div class="brand-sub">Dispersion intelligence</div>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <a class="nav-item" data-route="dashboard" href="#/dashboard">
+          <span class="nav-idx">01</span>
+          <span data-i18n="nav.dashboard">Dashboard</span>
+        </a>
+        <a class="nav-item" data-route="scenarios" href="#/scenarios">
+          <span class="nav-idx">02</span>
+          <span data-i18n="nav.scenarios">Scenarios</span>
+        </a>
+        <a class="nav-item" data-route="analysis" href="#/analysis">
+          <span class="nav-idx">03</span>
+          <span data-i18n="nav.analysis">Plume analysis</span>
+        </a>
+        <a class="nav-item" data-route="map" href="#/map">
+          <span class="nav-idx">04</span>
+          <span data-i18n="nav.map">Dispersion map</span>
+        </a>
+        <a class="nav-item" data-route="drone" href="#/drone">
+          <span class="nav-idx">05</span>
+          <span data-i18n="nav.drone">Virtual drone</span>
+        </a>
+        <a class="nav-item" data-route="report" href="#/report">
+          <span class="nav-idx">06</span>
+          <span data-i18n="nav.report">Report</span>
+        </a>
+      </nav>
+
+      <div class="side-spacer"></div>
+
+      <div class="side-card">
+        <div class="row">
+          <span class="side-label" data-i18n="side.solver">Solver</span>
+          <span class="side-value">OpenFOAM</span>
+        </div>
+        <div class="row">
+          <span class="side-label" data-i18n="side.scenarios">Scenarios</span>
+          <span class="side-value" id="side-scenarios">—</span>
+        </div>
+        <div class="row">
+          <span class="side-label" data-i18n="side.updated">Updated</span>
+          <span class="side-value" id="side-updated">—</span>
+        </div>
+        <div class="row">
+          <span class="side-label" data-i18n="side.isaac">Isaac Sim</span>
+          <span class="pill off" id="isaac-pill"><i class="dot"></i><span data-i18n="common.offline">offline</span></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div>
+          <div class="page-kicker" id="page-kicker">GreenAirDrone</div>
+          <h1 class="page-title" id="page-title">Dashboard</h1>
+          <p class="page-sub" id="page-sub"></p>
+        </div>
+        <div class="top-actions">
+          <select class="select" id="scenario-select" aria-label="Scenario"></select>
+          <div class="lang" id="lang" role="group" aria-label="Language"></div>
+        </div>
+      </header>
+      <main class="view" id="view"></main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    (function () {
+      var lang = new URLSearchParams(location.search).get("lang");
+      if (lang && ["en", "uk", "ru"].indexOf(lang) >= 0) {
+        localStorage.setItem("gad.lang", lang);
+      }
+    })();
+  </script>
+  <script src="/static/vendor/echarts.min.js"></script>
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

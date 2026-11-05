@@ -1,0 +1,109 @@
+{
+  "scenario": "industrial_fire",
+  "description": "fire at an industrial site with plastics and stored materials",
+  "kind": "demonstration",
+  "source_box_m": [
+    [
+      30,
+      -6,
+      0
+    ],
+    [
+      40,
+      6,
+      10
+    ]
+  ],
+  "wind": {
+    "speed_m_s": 10,
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "note": "wind is frozen from greenAirDrone_plume3D (steady k-epsilon, U=10 m/s)"
+  },
+  "end_time_s": 60,
+  "write_interval_s": 5,
+  "delta_t_s": 0.04,
+  "rate_scale": 1.0,
+  "species": {
+    "CO": {
+      "display_name": "CO",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.02,
+      "rate_kg_s_nominal": 0.02,
+      "provenance": "demo",
+      "note": ""
+    },
+    "NO2": {
+      "display_name": "NO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.006,
+      "rate_kg_s_nominal": 0.006,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "SO2": {
+      "display_name": "SO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.004,
+      "rate_kg_s_nominal": 0.004,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "PM25": {
+      "display_name": "PM2.5",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.01,
+      "rate_kg_s_nominal": 0.01,
+      "provenance": "demo",
+      "note": ""
+    },
+    "PM10": {
+      "display_name": "PM10_coarse",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.006,
+      "rate_kg_s_nominal": 0.006,
+      "provenance": "demo",
+      "note": ""
+    },
+    "VOC": {
+      "display_name": "VOC",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.004,
+      "rate_kg_s_nominal": 0.004,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "HCl": {
+      "display_name": "HCl",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.002,
+      "rate_kg_s_nominal": 0.002,
+      "provenance": "assumed",
+      "note": "PVC/chlorinated material fires; scenario-dependent"
+    },
+    "BENZENE": {
+      "display_name": "benzene",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.001,
+      "rate_kg_s_nominal": 0.001,
+      "provenance": "assumed",
+      "note": "individual aromatic marker, not part of the VOC aggregate"
+    }
+  },
+  "limitations": [
+    "composition is illustrative; real composition depends on inventory and material mix",
+    "no chemistry, no aerosol dynamics"
+  ],
+  "parameter_warning": "All emission rates are demonstration values (demo/assumed), not measurements of a real incident."
+}

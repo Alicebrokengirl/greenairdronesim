@@ -1,0 +1,53 @@
+﻿scenario: industrial_fire
+data_root: data
+
+window:
+  width: 960
+  height: 540
+  hide_ui: true
+
+mission:
+  data_time_start: 0.0
+  data_time_end: 60.0
+  speed: 1.0
+  loop: true
+  hold_at_end_s: 3.0
+
+plume:
+  color_species: CO
+  weight_species: [CO, PM25, SO2]
+  particles: 42000
+  sample_time_s: 30.0
+  threshold_fraction: 0.003
+  gamma: 0.45
+  jitter_fraction: 0.44
+  min_ug_m3: 10.0
+  max_scale: 1.15
+  min_scale: 0.45
+  opacity_min: 0.0035
+  opacity_max: 0.018
+  emissive_scale: 0.15
+  sprite_variants: 6
+  embers: 600
+  seed: 7
+
+drone:
+  scale: 2.0
+
+cameras:
+  start: chase
+
+hud:
+  title: GREEN AIR DRONE
+  subtitle: ISAAC SIM // OPENFOAM PLUME
+  show: true
+
+
+
+
+
+
+
+
+
+

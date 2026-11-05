@@ -1,0 +1,91 @@
+{
+  "scenario": "residential_fire",
+  "description": "fire in a residential building (wood/furniture fuel)",
+  "kind": "demonstration",
+  "source_box_m": [
+    [
+      18,
+      -4,
+      0
+    ],
+    [
+      26,
+      4,
+      6
+    ]
+  ],
+  "wind": {
+    "speed_m_s": 10,
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "note": "wind is frozen from greenAirDrone_plume3D (steady k-epsilon, U=10 m/s)"
+  },
+  "end_time_s": 60,
+  "write_interval_s": 5,
+  "delta_t_s": 0.04,
+  "rate_scale": 1.0,
+  "species": {
+    "CO": {
+      "display_name": "CO",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.01,
+      "rate_kg_s_nominal": 0.01,
+      "provenance": "demo",
+      "note": "order of magnitude for a large compartment fire"
+    },
+    "NO2": {
+      "display_name": "NO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.0015,
+      "rate_kg_s_nominal": 0.0015,
+      "provenance": "assumed",
+      "note": "combustion NOx, demo value"
+    },
+    "SO2": {
+      "display_name": "SO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.0003,
+      "rate_kg_s_nominal": 0.0003,
+      "provenance": "assumed",
+      "note": "fuel sulfur content unknown"
+    },
+    "PM25": {
+      "display_name": "PM2.5",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.003,
+      "rate_kg_s_nominal": 0.003,
+      "provenance": "demo",
+      "note": "smoke fine fraction"
+    },
+    "PM10": {
+      "display_name": "PM10_coarse",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.0015,
+      "rate_kg_s_nominal": 0.0015,
+      "provenance": "demo",
+      "note": "coarse fraction 2.5-10 um"
+    },
+    "VOC": {
+      "display_name": "VOC",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.0012,
+      "rate_kg_s_nominal": 0.0012,
+      "provenance": "assumed",
+      "note": "aggregate indicator"
+    }
+  },
+  "limitations": [
+    "no buoyancy: the hot fire plume is represented as a passive ground-level source",
+    "no secondary aerosol formation or chemistry"
+  ],
+  "parameter_warning": "All emission rates are demonstration values (demo/assumed), not measurements of a real incident."
+}

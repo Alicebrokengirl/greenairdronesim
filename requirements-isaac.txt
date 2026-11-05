@@ -1,0 +1,5 @@
+# The Isaac Sim viewer needs the NVIDIA Isaac Sim 5.1 Python environment.
+# Install it following the official instructions for your platform, then use
+# that environment (or the repo venv created from it) to run greenair/app.py.
+# https://docs.isaacsim.omniverse.nvidia.com/
+isaacsim==5.1.0.0

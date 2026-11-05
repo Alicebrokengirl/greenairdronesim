@@ -1,0 +1,1156 @@
+{
+  "scenario": "industrial_fire",
+  "description": "fire at an industrial site with plastics and stored materials",
+  "kind": "demonstration",
+  "openfoam_version": "14",
+  "solver": "incompressibleFluid (frozen steady RANS k-epsilon) + scalarTransport",
+  "domain_m": {
+    "x": [
+      0,
+      100
+    ],
+    "y": [
+      -25,
+      25
+    ],
+    "z": [
+      0,
+      40
+    ]
+  },
+  "mesh_cells": 200000,
+  "grid_shape_nz_ny_nx": [
+    40,
+    50,
+    100
+  ],
+  "times_s": [
+    0.0,
+    5.0,
+    10.0,
+    15.0,
+    20.0,
+    25.0,
+    30.0,
+    35.0,
+    40.0,
+    45.0,
+    50.0,
+    55.0,
+    60.0
+  ],
+  "time_step_s": 0.04,
+  "write_interval_s": 5,
+  "wind": {
+    "speed_m_s": 10,
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "note": "wind is frozen from greenAirDrone_plume3D (steady k-epsilon, U=10 m/s)"
+  },
+  "source_box_m": [
+    [
+      30,
+      -6,
+      0
+    ],
+    [
+      40,
+      6,
+      10
+    ]
+  ],
+  "species": {
+    "CO": {
+      "display_name": "CO",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.02,
+      "provenance": "demo",
+      "note": ""
+    },
+    "NO2": {
+      "display_name": "NO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.006,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "SO2": {
+      "display_name": "SO2",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.004,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "PM25": {
+      "display_name": "PM2.5",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.01,
+      "provenance": "demo",
+      "note": ""
+    },
+    "PM10": {
+      "display_name": "PM10_coarse",
+      "phase": "particulate",
+      "units": "kg/m3",
+      "rate_kg_s": 0.006,
+      "provenance": "demo",
+      "note": ""
+    },
+    "VOC": {
+      "display_name": "VOC",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.004,
+      "provenance": "assumed",
+      "note": ""
+    },
+    "HCl": {
+      "display_name": "HCl",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.002,
+      "provenance": "assumed",
+      "note": "PVC/chlorinated material fires; scenario-dependent"
+    },
+    "BENZENE": {
+      "display_name": "benzene",
+      "phase": "gas",
+      "units": "kg/m3",
+      "rate_kg_s": 0.001,
+      "provenance": "assumed",
+      "note": "individual aromatic marker, not part of the VOC aggregate"
+    }
+  },
+  "units": {
+    "coordinates": "m",
+    "time": "s",
+    "U": "m/s",
+    "concentration": "kg/m3 (also ug/m3; CO also mg/m3 for compatibility)",
+    "stored_mass": "kg",
+    "outlet_flux": "kg/s",
+    "cell_volume": "m3"
+  },
+  "interpolation": {
+    "grid": "rectilinear cell-centre grid, single block",
+    "method": "trilinear in space, linear in time (sensors/plume_sensor.py)",
+    "outside_domain": "explicit failure, not zero"
+  },
+  "files": {
+    "full_fields": "fields_t<T>.npz (float32, shape nz,ny,nx)",
+    "csv": "plume_t<T>.csv (stride 4)",
+    "csv_stride": 4,
+    "planes": "planes/plane_z*.csv",
+    "probes": "probes.csv (nearest cell, distance reported)",
+    "timeseries": "timeseries.csv"
+  },
+  "checks": {
+    "nan": 0,
+    "below_minus_1e_12": 0,
+    "negative_noise": 0,
+    "max_negative": 0.0
+  },
+  "summary": [
+    {
+      "time_s": 0.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "NO2": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "SO2": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "PM25": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "PM10": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "VOC": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "HCl": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      },
+      "BENZENE": {
+        "max_kg_m3": 0.0,
+        "max_location_m": [
+          0.5,
+          -24.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0
+      }
+    },
+    {
+      "time_s": 5.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0999047456804291
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.02997142370577131
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.019980949141591584
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.049952372825256
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.02997142370577131
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.019980949141591584
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.009990474564237444
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.004995237286496075
+      }
+    },
+    {
+      "time_s": 10.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017633917278715
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905290175902379
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035267829563547
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816959555892
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905290175902379
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035267829563547
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017633918034616
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816957012078
+      }
+    },
+    {
+      "time_s": 15.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632848008528
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.039052898537593396
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265693888247
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0650881642428933
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.039052898537593396
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265693888247
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632848620196
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816421353757
+      }
+    },
+    {
+      "time_s": 20.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468536
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400179
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697937255
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425528888
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400179
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697937255
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850866719
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.0065088164223933145
+      }
+    },
+    {
+      "time_s": 25.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 30.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 35.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 40.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 45.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 50.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 55.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    },
+    {
+      "time_s": 60.0,
+      "cells": 200000,
+      "CO": {
+        "max_kg_m3": 1.7237167412531562e-05,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.13017632850468844
+      },
+      "NO2": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "SO2": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "PM25": {
+        "max_kg_m3": 8.618583706265781e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.06508816425529544
+      },
+      "PM10": {
+        "max_kg_m3": 5.171149950911058e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.03905289854400496
+      },
+      "VOC": {
+        "max_kg_m3": 3.447433300607372e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.026035265697938913
+      },
+      "HCl": {
+        "max_kg_m3": 1.723716650303686e-06,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.013017632850867152
+      },
+      "BENZENE": {
+        "max_kg_m3": 8.61858325151843e-07,
+        "max_location_m": [
+          39.5,
+          0.5,
+          0.20011606
+        ],
+        "stored_kg": 0.006508816422394435
+      }
+    }
+  ],
+  "parameter_warning": "All emission rates are demonstration values (demo/assumed), not measurements of a real incident.",
+  "limitations": [
+    "composition is illustrative; real composition depends on inventory and material mix",
+    "no chemistry, no aerosol dynamics",
+    "passive scalars: no chemistry, no secondary aerosol, no buoyancy",
+    "PM fractions are passive: no gravitational settling or deposition"
+  ]
+}

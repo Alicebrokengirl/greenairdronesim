@@ -1,0 +1,31 @@
+# Python
+venv/
+venv*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Local environment
+.env
+.env.*
+
+# Runtime output (created by Isaac Sim and the web server)
+captures/
+*.log
+
+# Large local installers
+drivers/
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+
+# Scratch / outdated working files
+*.bak
+/PROGRESS.md
+web/crop*.png
+web/shot_*.png
+web/dump.html
